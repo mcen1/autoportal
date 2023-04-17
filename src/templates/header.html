@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="{{URLPREFACE or ""}}{{ url_for('static', filename='css/bootstrap.css') }}">
+<link rel="stylesheet" href="{{URLPREFACE or ""}}{{ url_for('static', filename='css/main.css') }}">
+<div id="header" class="navbar">
+  <div class="portallogo"><img src='{{URLPREFACE or ""}}{{ url_for('static', filename='images/automatelogo.png') }}'> &#x2022; <a class="navbarlink" href="{{URLPREFACE or ""}}/">Home</a> &#x2022; <a class="navbarlink" href="{{URLPREFACE or ""}}/logout">Logout</a>
+  </div>
+</div>
+<br>
+{% include "tag.html" %}
+

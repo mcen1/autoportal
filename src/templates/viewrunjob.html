@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>ITOA Automation Portal</title>
+    </head>
+    <body>
+{% include "header.html" %}
+<br><br><br>
+<div class="mainbody">
+<center>
+  <div class="joboutput" id="liveData">
+    <div id="load_jobdata">Please wait...</div>
+      <script type="text/javascript" src="{{URLPREFACE or ""}}{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+      <script type="text/javascript">
+      $("document").ready(function update(){
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.open("GET", "{{ URLPREFACE }}/awxjobabridged?jobid={{ jobid }}");
+        xhr.send();
+        xhr.addEventListener("readystatechange", function() {
+        var data= xhr.responseText;
+        if(this.readyState === 4) {
+          $('#load_jobdata').html(data);
+         // This appears to be the only reliable way of determining the AWX job has launched via the HTML output
+         if (!~data.indexOf('PLAY') && !~data.indexOf('TASK')) {
+          $('#load_jobdata').html("Waiting for {{jobid}} to launch..."+data);
+         }
+         if (~data.indexOf("PLAY RECAP")) {
+           setTimeout(update, 9999999999);
+           //console.log("play recap found in data. timeout should be huge");
+         }
+         if (!~data.indexOf("PLAY RECAP")) {
+           setTimeout(update, 5000);
+           //console.log("play recap notfound in data. timeout should be SMALL"+data.indexOf("PLAY RECAP"));
+          }
+        }
+       });
+     });
+     </script>
+  </div>
+  <br>
+  </center>
+  </div>
+</body>
+</html>

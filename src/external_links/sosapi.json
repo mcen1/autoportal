@@ -1,0 +1,8 @@
+{
+  "name": "some-tools",
+  "friendlyname": "Some tools",
+  "url": "https://sometools.company.com/",
+  "target": "_blank",
+  "valid-ad-groups": ["everyone"]
+}
+

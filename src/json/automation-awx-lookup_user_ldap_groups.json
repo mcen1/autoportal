@@ -1,0 +1,11 @@
+{
+  "awx-job-name": "automation-awx-lookup_user_ldap_groups-job",
+  "portal-endpoint": "automation-awx-lookup_user_ldap_groups",
+  "valid-ad-groups": ["CN=whatever,DC=company,DC=com"],
+  "job-type": "awx",
+  "run-via": ["form","url"],
+  "form-elements":[
+    {"friendly-name":"Please supply the username you wish to view the memberOf attributes:","type":"text","max-length":32, "var-name":"usernamesearch", "required": true }
+  ],
+  "description": "Look up a user's memberOf attribute to retrieve a list of their group memberships."
+}

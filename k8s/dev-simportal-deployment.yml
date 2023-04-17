@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simportal
+  labels:
+    app: simportal 
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: simportal
+  template:
+    metadata:
+      labels:
+        app: simportal
+    spec:
+      containers:
+      - image: containers.company.com/tools/automation-portal-auto_mate:1.0.0
+        name: simportal
+        imagePullPolicy: Always
+        env:
+            # change per env
+          - name: PYTHONUNBUFFERED
+            value: '1'
+          - name: API_URL
+            value: 'api.company.com'
+          - name: LDAP_HOST
+            value: 'ldap.company.com'
+          - name: API_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: simportalsecrets
+                key: api_token
+          - name: URLPREFACE
+            value: "/portal"
+          - name: CERT_VERIFY
+            value: '/etc/ssl/certs/ca-certificates.crt'
+          - name: LDAP_BASEDN
+            value: 'DC=company,DC=com'
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      restartPolicy: Always
+
+ 

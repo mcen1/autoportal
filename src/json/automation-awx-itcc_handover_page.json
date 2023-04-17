@@ -1,0 +1,11 @@
+{
+  "awx-job-name": "automation-awx-itcc_handover_page-job",
+  "portal-endpoint": "automation-awx-itcc_handover_page",
+  "valid-ad-groups": ["CN=whatever,DC=company,DC=com"],
+  "job-type": "awx",
+  "run-via": ["form","url"],
+  "form-elements":[
+    {"friendly-name":"Please supply page_id you want to update:","type":"text","max-length":32, "var-name":"page_id", "required": false }
+  ],
+  "description": "Creates Confluence page for ITCC shift handover"
+}

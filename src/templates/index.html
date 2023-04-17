@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Auto-mate</title>
+    </head>
+    <body>
+{% include "header.html" %}
+<br><br><br>
+    <center>
+      <div class='normalone'>
+        <p>Hello {{ username }}. You have access to these jobs: <br>
+        {% if userlinks is defined and userlinks|length == 0 %}
+        You don't appear to have access to any jobs. Please contact <a href="mailto:someone@company.com">someone@company.com</a> to help you and provide what jobs you are expecting to see.
+        {% endif %}
+        {% for item in userlinks %}
+        <a href='{{item}}'>{{item}}</a><br>
+        {% endfor %}
+        {% if extlinks is defined and extlinks|length > 0 %}
+        <br>External links<br>
+        {% for item in extlinks %}
+        <a href='{{item["url"]}}' target='{{item["target"]}}'>{{item["friendlyname"]}}</a><br>
+        {% endfor %}
+        {% endif %}
+
+        <div>
+      </center>
+    </body>
+</html>
